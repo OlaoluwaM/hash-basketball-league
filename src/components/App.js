@@ -1,7 +1,25 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './Home';
+import Players from './Players';
+import Teams from './Teams';
+import NavBar from './NavBar';
+import Error from './Error';
 
 function App() {
-  return <div>React House</div>;
+  return (
+    <Router>
+      <div>
+        <NavBar />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/players' component={Players} />
+          <Route path='/teams' compon ent={Teams} />
+          <Route component={Error} />
+        </Switch>
+      </div>
+    </Router>
+  );
 }
 
 export default App;

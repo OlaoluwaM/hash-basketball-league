@@ -11,8 +11,8 @@ export default function Players({ location, match }) {
 
   React.useEffect(() => {
     if (location.search) {
-      const { teamid } = parse(location.search);
-      getPlayers(teamid).then((players) => setPlayers([...players]));
+      const { teamId } = parse(location.search);
+      getPlayers(teamId).then((players) => setPlayers([...players]));
     } else getPlayers().then((players) => setPlayers([...players]));
     return () => setPlayers([]);
   }, [location.search]);
@@ -29,6 +29,7 @@ export default function Players({ location, match }) {
         data={players.map(({ name }) => name)}
       />
       {!loading && location.pathname === '/players' && <DefaultText text='Select a Player' />}
+
       <Route
         path={`${match.url}/:player`}
         render={({ match }) => {
@@ -51,7 +52,9 @@ export default function Players({ location, match }) {
                     <li>
                       Team
                       <div>
-                        <Link to={`/${teamId}`}>{teamId}</Link>
+                        <Link to={`/${teamId}`}>
+                          {teamId.replace(teamId[0], teamId[0].toUpperCase())}
+                        </Link>
                       </div>
                     </li>
                     <li>

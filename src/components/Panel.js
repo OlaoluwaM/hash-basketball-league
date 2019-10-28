@@ -6,7 +6,7 @@ export function PanelHeader({ url, title, subheading, children, forTeam }) {
   return (
     <React.Fragment>
       {forTeam && <TeamLogo id={url} className='center' />}
-      {!forTeam && <img className='avatar' src={url} alt={`Image for ${title}`} />}
+      {!forTeam && <img className='avatar' src={url} alt={`${title}'s avatar`} />}
       <h1 className='medium-header'>{title}</h1>
       {subheading && <h3 className='header'>{subheading}</h3>}
       {children}

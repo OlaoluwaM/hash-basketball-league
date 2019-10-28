@@ -5,11 +5,12 @@ import { getTeamNames } from '../utils/api';
 
 export default function Home() {
   const [teams, setTeams] = React.useState([]);
+
   React.useEffect(() => {
     getTeamNames().then((teams) => setTeams([...teams]));
     return () => setTeams([]);
   }, []);
-  console.log(teams);
+
   return (
     <div className='container'>
       <h1 className='large-header'>Hash History Basketball League</h1>

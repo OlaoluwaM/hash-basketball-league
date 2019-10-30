@@ -7,6 +7,7 @@ import slug from 'slug';
 import { PanelHeader, DefaultText } from './Panel';
 import normalize from '../utils/normalize';
 import Loading from './Loading';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 export default function Players({ location, match }) {
   const [players, setPlayers] = React.useState([]);
@@ -43,41 +44,45 @@ export default function Players({ location, match }) {
           if (loading) return <Loading message={`Bringing out ${name}`} />;
 
           return (
-            <div className='panel'>
-              <PanelHeader url={avatar} title={name} subheading={`#${number}`}>
-                <div className='row'>
-                  <ul
-                    className='info-list'
-                    style={{
-                      marginRight: 80
-                    }}>
-                    <li>
-                      Team
-                      <div>
-                        <Link to={`/${teamId}`}>{normalize(teamId)}</Link>
-                      </div>
-                    </li>
-                    <li>
-                      Postion<div>{position}</div>
-                    </li>
-                    <li>
-                      PPG<div>{ppg}</div>
-                    </li>
-                  </ul>
-                  <ul className='info-list'>
-                    <li>
-                      APG<div>{apg}</div>
-                    </li>
-                    <li>
-                      SPG<div>{spg}</div>
-                    </li>
-                    <li>
-                      RPG<div>{rpg}</div>
-                    </li>
-                  </ul>
+            <TransitionGroup className='panel'>
+              <CSSTransition key={location.key} timeout={250} classNames='fade'>
+                <div className='panel'>
+                  <PanelHeader url={avatar} title={name} subheading={`#${number}`}>
+                    <div className='row'>
+                      <ul
+                        className='info-list'
+                        style={{
+                          marginRight: 80
+                        }}>
+                        <li>
+                          Team
+                          <div>
+                            <Link to={`/${teamId}`}>{normalize(teamId)}</Link>
+                          </div>
+                        </li>
+                        <li>
+                          Postion<div>{position}</div>
+                        </li>
+                        <li>
+                          PPG<div>{ppg}</div>
+                        </li>
+                      </ul>
+                      <ul className='info-list'>
+                        <li>
+                          APG<div>{apg}</div>
+                        </li>
+                        <li>
+                          SPG<div>{spg}</div>
+                        </li>
+                        <li>
+                          RPG<div>{rpg}</div>
+                        </li>
+                      </ul>
+                    </div>
+                  </PanelHeader>
                 </div>
-              </PanelHeader>
-            </div>
+              </CSSTransition>
+            </TransitionGroup>
           );
         }}
       />

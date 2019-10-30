@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Route } from 'react-router-dom';
 import slug from 'slug';
+import Loading from './Loading';
 
 function CustomLink({ to, children }) {
   const { pathname } = to;
@@ -23,7 +24,7 @@ function CustomLink({ to, children }) {
 
 export default function SideBar({ title, data, loading, location, match }) {
   if (loading) {
-    return <h1>LOADING</h1>;
+    return <Loading />;
   } else {
     return (
       <div>

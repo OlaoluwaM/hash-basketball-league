@@ -3,6 +3,7 @@ import { Route, useParams, useRouteMatch, useLocation } from 'react-router-dom';
 import SideBar from './SideBar';
 import { getTeamsArticles } from '../utils/api';
 import Article from './Article';
+import Loading from './Loading';
 
 export default function Articles() {
   const [teamsArticles, setArticles] = React.useState([]);
@@ -20,7 +21,7 @@ export default function Articles() {
   const loading = teamsArticles.length === 0;
   const { url } = match;
 
-  if (loading) return <h1>loading</h1>;
+  if (loading) return <Loading />;
   return (
     <div className='container two-column'>
       <SideBar
@@ -40,7 +41,7 @@ export default function Articles() {
               <Article articleId={articleId} teamId={teamId}>
                 {(article) => {
                   return !article ? (
-                    <h1>loading</h1>
+                    <Loading message='Loading Article' />
                   ) : (
                     <article className='article'>
                       <h1 className='header'>{article.title}</h1>

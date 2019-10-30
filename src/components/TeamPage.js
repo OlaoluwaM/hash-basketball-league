@@ -3,6 +3,8 @@ import { PanelHeader } from './Panel';
 import { Link, Redirect } from 'react-router-dom';
 import { getTeamsArticles, getTeamNames } from '../utils/api';
 import Team from './Team';
+import Loading from './Loading';
+import normalize from '../utils/normalize';
 
 export default function TeamPage({ match }) {
   const [articles, setArticles] = React.useState([]);
@@ -31,7 +33,7 @@ export default function TeamPage({ match }) {
         <Team id={teamId}>
           {(team) =>
             !team ? (
-              <h1>Loading</h1>
+              <Loading message={`Calling ${normalize(teamId)}`} />
             ) : (
               <PanelHeader url={team.id} forTeam={true} title={team.name}>
                 <h4 style={{ margin: 5 }}>

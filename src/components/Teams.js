@@ -4,6 +4,8 @@ import { Route, Link } from 'react-router-dom';
 import { PanelHeader, DefaultText } from './Panel';
 import { getTeamNames } from '../utils/api';
 import Team from './Team';
+import Loading from './Loading';
+import normalize from '../utils/normalize';
 
 export default function Teams({ location, match }) {
   const [teams, setTeams] = React.useState([]);
@@ -28,7 +30,7 @@ export default function Teams({ location, match }) {
               <Team id={teamName}>
                 {(team) =>
                   team === null ? (
-                    <h1>LOADING</h1>
+                    <Loading message={`Calling ${normalize(teamName)}`} />
                   ) : (
                     <div style={{ width: '100%' }}>
                       <PanelHeader url={team.id} title={team.name} forTeam={true}>

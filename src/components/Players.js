@@ -5,6 +5,8 @@ import { getPlayers } from '../utils/api';
 import { parse } from 'query-string';
 import slug from 'slug';
 import { PanelHeader, DefaultText } from './Panel';
+import normalize from '../utils/normalize';
+import Loading from './Loading';
 
 export default function Players({ location, match }) {
   const [players, setPlayers] = React.useState([]);
@@ -33,12 +35,12 @@ export default function Players({ location, match }) {
       <Route
         path={`${match.url}/:player`}
         render={({ match }) => {
-          if (loading) return null;
-
           const playerName = match.params.player;
           const { avatar, name, number, position, teamId, ppg, apg, rpg, spg } = players.find(
             ({ name }) => slug(name) === playerName
           );
+
+          if (loading) return <Loading message={`Bringing out ${name}`} />;
 
           return (
             <div className='panel'>
@@ -52,9 +54,7 @@ export default function Players({ location, match }) {
                     <li>
                       Team
                       <div>
-                        <Link to={`/${teamId}`}>
-                          {teamId.replace(teamId[0], teamId[0].toUpperCase())}
-                        </Link>
+                        <Link to={`/${teamId}`}>{normalize(teamId)}</Link>
                       </div>
                     </li>
                     <li>

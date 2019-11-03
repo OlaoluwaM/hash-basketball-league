@@ -233,10 +233,12 @@ a {
   }
 }
 .fade-enter {
+  opacity: 0;
   transform: translateX(600px);
   z-index: 1;
 }
 .fade-enter.fade-enter-active {
+  opacity: 1;
   transform: translateX(0);
   transition: 0.25s ease;
 }
